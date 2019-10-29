@@ -11,4 +11,9 @@ class UserProfile extends Model
     {
         return $this->belongsTo('App\User');
     }
+    //TODO Ask Team about relationship with User and UserProfile to confirm cohesion of app
+    function application()
+    {
+        return $this->belongsToMany('App\Application');
+    }
 }

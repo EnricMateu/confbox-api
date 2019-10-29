@@ -7,14 +7,14 @@ class CreateCompaniesTable extends Migration {
 
 	public function up()
 	{
-		Schema::create('companies', function(Blueprint $table) {
+		Schema::create('organizations', function(Blueprint $table) {
 			$table->engine = 'InnoDB';
 			$table->increments('company_id', true);
-			$table->string('company_name', 55)->nullable();
+			$table->string('organization_name', 55)->nullable();
 			$table->string('contact_name', 55)->nullable();
 			$table->string('contact_email')->unique();
 			$table->string('contact_phone', 55)->unique()->nullable();
-			$table->string('company_url')->nullable();
+			$table->string('organization_url')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -22,6 +22,6 @@ class CreateCompaniesTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('companies');
+		Schema::drop('organizations');
 	}
 }

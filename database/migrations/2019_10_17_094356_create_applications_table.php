@@ -13,15 +13,6 @@ class CreateApplicationsTable extends Migration {
 			$table->unsignedBigInteger('volunteer_id')->nullable();
 			$table->string('status', 55)->default('not_approved');
 			$table->integer('event_id')->unsigned()->nullable();
-			$table->string('firstname');
-			$table->string('lastname');
-			$table->string('street_address');
-			$table->string('city');
-			$table->string('country');
-			$table->integer('postcode');
-			$table->string('email');
-			$table->string('phone');
-			$table->string('linkedin_url');
 			$table->timestamps();
 			$table->softDeletes();
 		});

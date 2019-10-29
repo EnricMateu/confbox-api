@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 
 /*
@@ -16,3 +17,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resources([
+    '/application'=> 'ApplicationController',
+    '/event'=> 'EventController',
+    ]);
+
+Route::get('validateEvent/{event}','EventController@validateEvent');
+Route::get('validatedEvents','EventController@showValidatedEvents');

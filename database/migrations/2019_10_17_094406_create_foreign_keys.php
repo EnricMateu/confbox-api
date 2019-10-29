@@ -23,6 +23,11 @@ class CreateForeignKeys extends Migration {
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
+        Schema::table('user_profiles', function(Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+        });
 	}
 
 	public function down()

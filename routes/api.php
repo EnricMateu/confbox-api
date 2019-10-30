@@ -19,9 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resources([
-    '/application'=> 'ApplicationController',
+    // '/application'=> 'ApplicationController',
     '/event'=> 'EventController',
-    ]);
+]);
 
 Route::get('validateEvent/{event}','EventController@validateEvent');
 Route::get('validatedEvents','EventController@showValidatedEvents');
+Route::get('event/{event}/apply', 'ApplicationController@store');

@@ -7,79 +7,47 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+/*
+* Saving this method because it might be relevant when refactoring api to scale it up
+*  Relevant doc https://laravel.com/docs/5.8/validation#creating-form-requests
+
+    public function rules()
+    {
+        return [
+        'company_name' => 'bail|required|unique|string|max:55',
+        'contact_name' => 'required|string|max:55',
+        'contact_email' => 'required|unique|string|max:55',
+        'contact_phone' => 'required|unique|integer|max:55',
+        'company_url' => 'required|unique|string'];
+    }
+*
+*/
     public function index()
     {
-        //
+        $companies= Company::all();
+        return json_encode($companies);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show(Company $company)
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request,Company $company)
     {
-        //
+        return Company::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Company  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Company $organization)
+    public function update(Request $request,Company $company)
     {
-        //
+        $company->update($request->all());
+        return response()->json($company, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Company  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Company $organization)
+    public function delete(Request $request,Company $company)
     {
-        //
-    }
+        $company->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Company  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Company $organization)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Company  $organization
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Company $organization)
-    {
-        //
+        return response()->json(null, 204);
     }
 }

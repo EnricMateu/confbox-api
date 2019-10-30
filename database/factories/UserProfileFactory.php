@@ -6,7 +6,17 @@ use App\UserProfile;
 use Faker\Generator as Faker;
 
 $factory->define(UserProfile::class, function (Faker $faker) {
-    return [
-        //
-    ];
+return [
+
+//    'user_id'=> $faker->unique()->(50) ,
+    'profile_name'=> $faker ->name ,
+    'first_name'=> $faker -> firstName,
+    'last_name'=> $faker ->lastName ,
+    'street_address'=> $faker ->streetAddress ,
+    'city'=> $faker ->city ,
+    'country'=> $faker ->country ,
+    'postcode'=> $faker ->randomNumber(5),
+    'phone'=> $faker ->phoneNumber ,
+    'linkedin_url'=> $faker ->url
+];
 });

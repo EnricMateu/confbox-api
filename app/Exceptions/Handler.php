@@ -29,10 +29,13 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public
+    function report(
+        Exception $exception
+    )
     {
         parent::report($exception);
     }
@@ -40,12 +43,31 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public
+    function render(
+        $request, Exception $exception
+    )
     {
-        return parent::render($request, $exception);
-    }
+        /*
+         *  ORIGINAL CODE
+         * return parent::render($request, $exception);
+         */
+
+
+        // This will replace our 404 response with a JSON response and specify the name of the model
+            if ($exception instanceof ModelNotFoundException) {
+                return response()->json([
+                    'error' => 'Entry for ' . str_replace('App\\',
+                            '',
+                            $exception->getModel()) . ' not found'],
+                    404);
+            }
+
+            return parent::render($request,
+                $exception);
+        }
 }

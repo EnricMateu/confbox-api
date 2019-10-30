@@ -7,46 +7,38 @@ use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
+    public function rules()
+    {
+        return [
+            'city_id' => 'required|integer|exists:cities,id',
+            'address' => 'required'
+        ];
+    }
     public function index()
     {
-        $applications = UserProfile::all()->where('user_id', auth()->id());
-        return view('UserProfile.list', compact('userprofiles'));
+        return UserProfile::all();
     }
 
-    public function create()
+    public function show(UserProfile $userprofile)
     {
-        $application = new UserProfile();
-        return view('UserProfile.create', compact('UserProfile'));
+        return $userprofile;
     }
 
-    public function store(Request $request)
+    public function store(Request $request,UserProfile $userprofile)
     {
-        $newRequest = UserProfile::getVolunteerID($request);
-        UserProfile::create($newRequest);
-
-        // Mail::to(auth()->email->email)->send(new ReserveConfirmation($reserva));
-        return view('UserProfile.sent');
+        return UserProfile::create($request->all());
     }
 
-    public function show(UserProfile $application)
+    public function update(Request $request,UserProfile $userprofile)
     {
-        //
+        $userprofile->update($request->all());
+        return response()->json($userprofile, 200);
     }
 
-    public function edit(UserProfile $application)
+    public function delete(Request $request,UserProfile $userprofile)
     {
-        return view('UserProfile.edit', compact('UserProfile'));
-    }
+        $userprofile->delete();
 
-    public function update(Request $request, UserProfile $application)
-    {
-        $application->update($request->all());
-        return redirect('/UserProfile');
-    }
-
-    public function destroy(UserProfile $application)
-    {
-        $application->destroy($application->id);
-        return redirect('/UserProfile');
+        return response()->json(null, 204);
     }
 }

@@ -12,9 +12,9 @@ $factory->define(Event::class, function (Faker $faker) {
         'country'=>$faker->country,
         'city'=>$faker->city,
         'event_url'=>$faker->url,
-        'approval_status'=>$faker->approval,
-        'title'=>$faker->title,
-        'topic'=>$faker->topic,
-        'description'=>$faker->description,
+        'approval_status'=>$faker->text,
+        'title'=>$faker->Realtext,
+        'topic'=>$faker->Realtext,
+        'description'=>$faker->Realtext,
        ];
 });

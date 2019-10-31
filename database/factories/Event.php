@@ -12,7 +12,7 @@ $factory->define(Event::class, function (Faker $faker) {
         'country'=>$faker->country,
         'city'=>$faker->city,
         'event_url'=>$faker->url,
-        'approval_status'=>$faker->text,
+        'approval_status'=>$faker->Realtext,
         'title'=>$faker->Realtext,
         'topic'=>$faker->Realtext,
         'description'=>$faker->Realtext,

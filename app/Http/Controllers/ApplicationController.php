@@ -28,7 +28,7 @@ class ApplicationController extends Controller
         ];
 
         $response = Application::create($application);
-        // return $response;
+        return $response;
     }
 
     public function show(Application $application)
@@ -44,17 +44,12 @@ class ApplicationController extends Controller
     public function update(Request $request, Application $application)
     {
         $application->update($request->all());
-        dd($application);
-        return ('/application');
+        return redirect('/application');
     }
 
     public function destroy(Application $application)
     {
         $application->destroy($application->id);
         return redirect('/application');
-    }
-
-    public function getEventId(Request $request, $event_id)
-    {
     }
 }

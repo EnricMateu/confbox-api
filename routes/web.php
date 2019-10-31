@@ -15,7 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('validateEvent/{event}','EventController@validateEvent');
-// Route::get('validatedEvents','EventController@showValidatedEvents');
-// Route::get('event/{event}/apply', 'ApplicationController@getEventId');
-
+Route::get('validateEvent/{event}','EventController@validateEvent');
+Route::get('validatedEvents','EventController@showValidatedEvents');

@@ -32,10 +32,16 @@ class CompanyController extends Controller
     {
         //
     }
+    public function create()
+    {
+        $application = new Company();
+        return view('application.create', compact('application'));
+    }
 
     public function store(Request $request,Company $company)
     {
-        return Company::create($request->all());
+       $newCompany = Company::create($request->all());
+        return response()->json($newCompany, 200);
     }
 
     public function update(Request $request,Company $company)

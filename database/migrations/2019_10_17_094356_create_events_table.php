@@ -9,7 +9,7 @@ class CreateEventsTable extends Migration {
 	{
 		Schema::create('events', function(Blueprint $table) {
 			$table->engine = 'InnoDB';
-			$table->increments('id');
+			$table->bigIncrements('id');
 			//$table->increments('id')->primary();
 			$table->date('date_from')->nullable();
 			$table->date('date_to')->nullable();

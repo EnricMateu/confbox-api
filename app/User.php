@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\UserProfile;
 
 class User extends Authenticatable
 {
@@ -36,10 +37,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //TODO Ask Team about relationship with User and UserProfile to confirm cohesion of app
-    function application()
-    {
-        return $this->hasMany('App\User');
-    }
 
+
+    function profile()
+    {
+        return $this->hasMany('App\UserProfile');
+    }
 }

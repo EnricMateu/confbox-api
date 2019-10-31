@@ -14,15 +14,20 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('no action');
 		});
 		Schema::table('applications', function(Blueprint $table) {
-			$table->foreign('volunteer_id')->references('id')->on('users')
-						->onDelete('cascade')
-						->onUpdate('cascade');
+			$table->foreign('volunteer_id')->references('id')->on('user_profiles')
+						->onDelete('no action')
+						->onUpdate('no action');
 		});
 		Schema::table('applications', function(Blueprint $table) {
 			$table->foreign('event_id')->references('id')->on('events')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
+        Schema::table('user_profiles', function(Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+        });
 	}
 
 	public function down()

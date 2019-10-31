@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CompanyController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,38 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resources([
-    '/application'=> 'ApplicationController',
+    // '/application'=> 'ApplicationController',
     '/event'=> 'EventController',
-    ]);
+]);
 
 Route::get('validateEvent/{event}','EventController@validateEvent');
 Route::get('validatedEvents','EventController@showValidatedEvents');
+Route::get('event/{event}/apply', 'ApplicationController@store');
+
+
+
+//* COMPANY PROFILE API ROUTES BELOW THIS LINE
+Route::get('/companies', 'CompanyController@index');
+Route::get('/companies/{companies}', 'CompanyController@show');
+Route::post('/companies', 'CompanyController@store');
+Route::put('/companies/{companies}', 'CompanyController@update');
+Route::delete('/companies/{companies}', 'CompanyController@delete');
+//* END OF COMPANY ROUTES
+
+//* USER PROFILE API ROUTES BELOW THIS LINE
+Route::get('userprofiles', 'UserProfileController@index');
+Route::get('userprofiles/{userprofile}', 'UserProfileController@show');
+Route::post('userprofiles', 'UserProfileController@store');
+Route::put('userprofiles/{userprofile}', 'UserProfileController@update');
+Route::delete('userprofiles/{userprofile}', 'UserProfileController@delete');
+//* END OF USER PROFILE  ROUTES
+
+
+/*
+* Returns Json Message if Api Route does not exist or is wrong
+* @return \Illuminate\Http\Response
+*/
+Route::fallback(function(){
+return response()->json([
+    'message' => 'Page Not Found. If error persists, contact info@website.com'], 404);
+});

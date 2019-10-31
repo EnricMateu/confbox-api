@@ -16,6 +16,7 @@ class CreateUserProfilesTable extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('profile_name');
             $table->string('first_name');
             $table->string('last_name');
@@ -23,8 +24,9 @@ class CreateUserProfilesTable extends Migration
             $table->string('city');
             $table->string('country');
             $table->integer('postcode');
-            $table->string('phone');
-            $table->string('linkedin_url');
+            $table->string('phone')->unique();
+            $table->string('linkedin_url')->unique();
+            $table->string('user_type', 55)->default('volunteer');
             $table->softDeletes();
             $table->timestamps();
         });

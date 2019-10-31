@@ -23,12 +23,14 @@ Route::middleware('auth:api')->get(/**
 });
 
 Route::resources([
-    '/application'=> 'ApplicationController',
+    // '/application'=> 'ApplicationController',
     '/event'=> 'EventController',
-    ]);
+]);
 
 Route::get('validateEvent/{event}','EventController@validateEvent');
 Route::get('validatedEvents','EventController@showValidatedEvents');
+Route::get('event/{event}/apply', 'ApplicationController@store');
+
 
 
 //* COMPANY PROFILE API ROUTES BELOW THIS LINE

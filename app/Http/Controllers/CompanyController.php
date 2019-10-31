@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
 /*
 * Saving this method because it might be relevant when refactoring api to scale it up
 *  Relevant doc https://laravel.com/docs/5.8/validation#creating-form-requests
@@ -34,8 +36,8 @@ class CompanyController extends Controller
     }
     public function create()
     {
-        $application = new Company();
-        return view('application.create', compact('application'));
+        $company = new Company();
+        return view('application.create', compact('company'));
     }
 
     public function store(Request $request,Company $company)

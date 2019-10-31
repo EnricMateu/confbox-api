@@ -4,17 +4,20 @@ namespace Tests\Unit;
 
 use App\Company;
 use App\Http\Controllers\CompanyController;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+//use Faker\Generator as Faker;
 use Mockery;
 use Illuminate\Http\Request;
 
-class CompanyControllerTest extends \PHPUnit_Framework_TestCase
+class CompanyControllerTest extends TestCase
 {
 
-
+    use WithoutMiddleware,WithFaker,InteractsWithExceptionHandling;
 
 
     /**
@@ -41,12 +44,7 @@ class CompanyControllerTest extends \PHPUnit_Framework_TestCase
                 'contact_email'     =>     'test@company.com',
                 'contact_phone'     =>     '666-777-888',
             ];
-            $data = [
-                'company_name'     =>     $faker->company,
-                'contact_name'     =>     'Mr Company Member',
-                'contact_email'     =>     'test@company.com',
-                'contact_phone'     =>     '666-777-888',
-            ];
+
             $response = $this->json('post','/api/companies',
                 $data);
             $savedCompany = Company::first();
@@ -55,48 +53,35 @@ class CompanyControllerTest extends \PHPUnit_Framework_TestCase
         }
     */
     public
-    function test_Company_Can_Be_Created_B()
+    function test_Company_Can_Be_Created_B(
+    )
     {
+ /*       $data = [
+            'company_name'  =>   $faker->company,
+            'contact_name'  =>   $faker->name,
+            'contact_email' =>  $faker->email,
+            'contact_phone' =>  $faker->phoneNumber,
+            'company_url'   =>  $faker->internet,
+        ];*/
 
-        $expectedNewCompany = factory(Company::class)->create();
-        $array = json_encode($expectedNewCompany);
-        $response = $this->json('post',
-            '/api/companies',
-            $array);
-        $company = Company::first();
-        $this->assertDatabaseHas($array);
-        $this->assertEquals(200,
-            $response->getStatusCode());
-
-    }
-
-    public
-    function test_application_gets_userId_and_eventId_when_submitted()
-    {
-        Event::fake();
-        $CompanyData = [
-            'company_name' => 'Company 1',
-            'contact_email' => 'test1@company.com',
-            'contact_phone' => '111-1',
-            'company_url' => 'test1.com',
+        $data = [
+            'company_name'  =>   'Company 3',
+            'contact_name'  =>   'Person 2',
+            'contact_email' =>  'Email 3',
+            'contact_phone' =>  '333-333',
+            'company_url'   =>  'Url 3'
         ];
 
-        $response = $this->json('post',
-            '/api/companies',
-            [$CompanyData]);
-        $company = Company::first();
-        $response->assertStatus(200);
-        $response->assertJson([
-            'created' => true,
-        ]);
-        $this->assertCount(1,
-            Company::all());
-        $this->assertEquals($CompanyData['company_name'],
-            $company->company_name);
-        $this->assertEquals($CompanyData['contact_email'],
-            $company->contact_email);
-        $this->assertEquals($CompanyData['contact_phone'],
-            $company->contact_phone);
+        $company = new CompanyController();
+        $request = Company::store('/api/companies', 'POST',$data);
+        $response = $company->store();
+        $savedCompany = Company::first();
+        $this->assertCount(1, Company::all());
+        //$this->assertDatabaseHas($company);
+        $this->assertNotNull($savedCompany);
+        $this->assertEquals(200,
+            $response->getStatusCode());
     }
+
 
 }

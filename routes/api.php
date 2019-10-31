@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CompanyController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,7 @@ use App\Http\Controllers\CompanyController;
 |
 */
 
-Route::middleware('auth:api')->get(/**
- * @param Request $request
- * @return mixed
- */ '/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 

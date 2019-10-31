@@ -15,10 +15,7 @@ use App\Http\Controllers\CompanyController;
 |
 */
 
-Route::middleware('auth:api')->get(/**
- * @param Request $request
- * @return mixed
- */ '/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -26,6 +23,8 @@ Route::resources([
     '/application'=> 'ApplicationController',
     '/event'=> 'EventController',
     ]);
+
+    Route::resource('event', 'EventController');
 
 Route::get('validateEvent/{event}','EventController@validateEvent');
 Route::get('validatedEvents','EventController@showValidatedEvents');

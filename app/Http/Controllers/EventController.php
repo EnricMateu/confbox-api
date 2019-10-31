@@ -16,7 +16,7 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
-        dd($events);
+        //dd($events);
         return json_encode($events);
     }
    
@@ -41,8 +41,8 @@ class EventController extends Controller
     public function edit(Event $event)
     {
        //return view('/Events/edit',['event' => $event]);
-       //return json_encode($event);
-       return response()->json($event, 200);
+       return json_encode($event);
+       //return response()->json($event, 200);
     }
 
     public function update(Request $request, Event $event)

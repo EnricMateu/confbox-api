@@ -22,7 +22,7 @@ class ApplicationController extends Controller
     public function store(Request $request, $event_id)
     {
         $application = [
-            'state'=> Application::$pending,
+            'status'=> Application::$pending,
             'event_id'=> $event_id,
             'user_id'=> auth()->id(),
         ];
@@ -54,7 +54,18 @@ class ApplicationController extends Controller
         return redirect('/application');
     }
 
-    public function getEventId(Request $request, $event_id)
+    public function changeApplicationStatus(Request $request, $application_id)
     {
+        $application = Application::find($application_id);
+        
+        if(!$request->approved)
+        {
+            $application->status = Application::$rejected;
+            $application->update();
+            return;
+        }
+        $application->status = Application::$approved;
+        $application->update();
+        return;
     }
 }

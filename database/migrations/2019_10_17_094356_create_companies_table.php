@@ -22,6 +22,6 @@ class CreateCompaniesTable extends Migration {
 
 	public function down()
 	{
-		Schema::drop('companies');
+		Schema::drop('organizations');
 	}
 }

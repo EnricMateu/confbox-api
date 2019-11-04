@@ -19,7 +19,7 @@ class EventController extends Controller
         //dd($events);
         return json_encode($events);
     }
-   
+
     public function create()
     {
         $event = new Event();
@@ -37,7 +37,7 @@ class EventController extends Controller
     {
         //
     }
-   
+
     public function edit(Event $event)
     {
        //return view('/Events/edit',['event' => $event]);
@@ -55,7 +55,7 @@ class EventController extends Controller
         //return json_encode($event);
         return response()->json($event, 200);
     }
-   
+
     public function destroy(Event $event)
     {
         //

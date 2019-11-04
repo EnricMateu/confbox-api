@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CompanyController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,17 +21,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resources([
-    '/application'=> 'ApplicationController',
+    // '/application'=> 'ApplicationController',
     '/event'=> 'EventController',
-    ]);
+]);
 
-    Route::resource('event', 'EventController');
-
+    //Route::resource('event', 'EventController');
 Route::get('validateEvent/{event}','EventController@validateEvent');
 Route::get('validatedEvents','EventController@showValidatedEvents');
 
+// APPLICATION ROUTES
+Route::get('event/{event}/apply', 'ApplicationController@store');
+Route::put('/application/{application}/update-status', 'ApplicationController@changeApplicationStatus');
 
-//* COMPANY PROFILE API ROUTES BELOW THIS LINE
+
+
+//* COMPANY PROFILE API ROUTES
 Route::get('/companies', 'CompanyController@index');
 Route::get('/companies/{companies}', 'CompanyController@show');
 Route::post('/companies', 'CompanyController@store');
@@ -38,7 +43,7 @@ Route::put('/companies/{companies}', 'CompanyController@update');
 Route::delete('/companies/{companies}', 'CompanyController@delete');
 //* END OF COMPANY ROUTES
 
-//* USER PROFILE API ROUTES BELOW THIS LINE
+//* USER PROFILE API ROUTES
 Route::get('userprofiles', 'UserProfileController@index');
 Route::get('userprofiles/{userprofile}', 'UserProfileController@show');
 Route::post('userprofiles', 'UserProfileController@store');

@@ -19,11 +19,16 @@ class ApplicationController extends Controller
         return view('application.create', compact('application'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $event_id)
     {
-        // $newRequest = Application::getVolunteerID($request);
-        $newApplication = Application::create($request->all());
-        return json_encode($newApplication);
+        $application = [
+            'status'=> Application::$pending,
+            'event_id'=> $event_id,
+            'user_id'=> auth()->id(),
+        ];
+
+        $response = Application::create($application);
+        return $response;
     }
 
     public function show(Application $application)
@@ -46,5 +51,20 @@ class ApplicationController extends Controller
     {
         $application->destroy($application->id);
         return redirect('/application');
+    }
+
+    public function changeApplicationStatus(Request $request, $application_id)
+    {
+        $application = Application::find($application_id);
+        
+        if(!$request->approved)
+        {
+            $application->status = Application::$rejected;
+            $application->update();
+            return;
+        }
+        $application->status = Application::$approved;
+        $application->update();
+        return;
     }
 }

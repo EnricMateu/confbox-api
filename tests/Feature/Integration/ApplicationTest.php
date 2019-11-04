@@ -30,6 +30,38 @@ class ApplicationTest extends TestCase
         $this->assertEquals($expectedApplication['status'], $application->status);
         $this->assertEquals($expectedApplication['event_id'], $application->event_id);
         $this->assertEquals($expectedApplication['user_id'], $application->user_id);
+    }
+
+    public function test_application_status_changes_to_approved()
+    {
+        $expectedStatus = 1;
+        $event = factory(Event::class)->create();
+        $this->get('/api/event/' . $event->id . '/apply');
+
+        $application = Application::first();
+        $response = $this->put('/api/application/' . $application->id  . '/update-status', ['approved'=> 1]);
+        
+        $updatedApplication = Application::find($application->id);
+
+        $response->assertStatus(200);
+        $this->assertEquals($expectedStatus, $updatedApplication->status);
+    }
+
+    public function test_application_status_changes_to_rejected()
+    {
+        $expectedStatus = 2;
+        $event = factory(Event::class)->create();
+        $this->get('/api/event/' . $event->id . '/apply');
+
+        $application = Application::first();
+        $response = $this->put('/api/application/' . $application->id  . '/update-status', ['rejected'=> 2]);
+        
+        $updatedApplication = Application::find($application->id);
+
+        $response->assertStatus(200);
+        $this->assertEquals($expectedStatus, $updatedApplication->status);
 
     }
+
+    
 }

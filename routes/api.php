@@ -25,7 +25,7 @@ Route::resources([
     '/event'=> 'EventController',
 ]);
 
-// EVENTS ROUTES
+    //Route::resource('event', 'EventController');
 Route::get('validateEvent/{event}','EventController@validateEvent');
 Route::get('validatedEvents','EventController@showValidatedEvents');
 

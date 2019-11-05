@@ -14,8 +14,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Events::getAllEvents();
-        dd($events);
+        $events = Events::getAllEvents()->where('country', 'Spain');
         return json_encode($events);
     }
 
@@ -70,8 +69,6 @@ class EventController extends Controller
     {
         $events = new Events();
         $validatedEvents = $events->getValidatedEvents();
-        // $validatedEvents = DB::table('events')->where('approval_status', Event::$approved)->get();
-        //return json_encode($validatedEvents);
         return response()->json($validatedEvents, 200);
     }
 

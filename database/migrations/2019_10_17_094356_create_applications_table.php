@@ -11,7 +11,7 @@ class CreateApplicationsTable extends Migration {
 			$table->engine = 'InnoDB';
 			$table->bigIncrements('id');
 			$table->bigInteger('volunteer_id')->unsigned()->nullable();
-			$table->string('status', 55)->default('not_approved');
+			$table->string('status')->default(0);
 			$table->bigInteger('event_id')->unsigned()->nullable();
 			$table->timestamps();
 			$table->softDeletes();

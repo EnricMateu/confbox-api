@@ -23,11 +23,4 @@ class Application extends Model
         return $this->belongsTo(Event::class);
     }
 
-    // static function addVolunteerID($request)
-    // {
-    //     $newRequest = $request->all();
-    //     $newRequest['volunteer_id'] = auth()->id();
-    //     return $newRequest;
-    // }
-
 }

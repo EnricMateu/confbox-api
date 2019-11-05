@@ -10,17 +10,17 @@ class CreateEventsTable extends Migration {
 		Schema::create('events', function(Blueprint $table) {
 			$table->engine = 'InnoDB';
 			$table->bigIncrements('id');
-			//$table->increments('id')->primary();
 			$table->date('date_from')->nullable();
 			$table->date('date_to')->nullable();
 			$table->integer('organizing_company_id')->unsigned()->nullable();
-			$table->string('country', 255);
-			$table->string('city', 255);
-			$table->string('event_url', 255)->nullable();
-			$table->string('approval_status', 30)->default('not_approved');
-			$table->string('title', 255)->nullable();
-			$table->string('topic', 255)->nullable();
-			$table->string('description', 1000)->nullable();
+			$table->string('country');
+			$table->string('city');
+			$table->string('event_url')->nullable();
+			$table->string('approval_status')->default(0);
+			$table->string('title')->nullable();
+			$table->string('topic')->nullable();
+			$table->string('description')->nullable();
+			$table->string('img')->default('https://via.placeholder.com/150');
 			$table->timestamps();
 			$table->softDeletes();
 		});

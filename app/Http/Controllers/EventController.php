@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
 use App\Event;
-
-
+use App\Events;
 
 class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $events = Events::getAllEvents();
         dd($events);
         return json_encode($events);
     }
@@ -23,14 +22,13 @@ class EventController extends Controller
     public function create()
     {
         $event = new Event();
-        //return json_encode($event);
         return response()->json($event, 200);
     }
 
     public function store(Request $request)
     {
         return Event::create($request->all());
-        //return redirect('event/create');
+        return redirect()->action('EventController@showValidatedEvents');
     }
 
     public function show(Event $event)
@@ -61,17 +59,18 @@ class EventController extends Controller
         //
     }
 
-    public function validateEvent (Event $event)
+    public function validateEvent(Event $event)
     {
-        $event->approval_status ="approved";
-        $event->save();
-        //return json_encode($event);
-        return response()->json($event, 200);
+        $event->approval_status = Event::$approved;
+        $event->update();
+        return json_encode($event);
     }
 
-    public function showValidatedEvents ()
+    public function showValidatedEvents()
     {
-        $validatedEvents = DB::table('events')->where('approval_status', '=', 'approved')->get();
+        $events = new Events();
+        $validatedEvents = $events->getValidatedEvents();
+        // $validatedEvents = DB::table('events')->where('approval_status', Event::$approved)->get();
         //return json_encode($validatedEvents);
         return response()->json($validatedEvents, 200);
     }

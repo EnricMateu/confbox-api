@@ -15,6 +15,8 @@ class ApplicationTest extends TestCase
 
     public function test_application_gets_userId_and_eventId_when_submitted()
     {
+        $this->assertCount(0, Event::all());
+        $this->assertCount(0, Application::all());
         $event = factory(Event::class)->create();
         $expectedApplication = [
             'status'=> 0,
@@ -25,7 +27,8 @@ class ApplicationTest extends TestCase
 
         $application = Application::first();
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
+        $this->assertCount(1, Event::all());
         $this->assertCount(1, Application::all());
         $this->assertEquals($expectedApplication['status'], $application->status);
         $this->assertEquals($expectedApplication['event_id'], $application->event_id);
@@ -62,6 +65,4 @@ class ApplicationTest extends TestCase
         $this->assertEquals($expectedStatus, $updatedApplication->status);
 
     }
-
-    
 }

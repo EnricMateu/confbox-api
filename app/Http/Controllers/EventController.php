@@ -69,7 +69,7 @@ class EventController extends Controller
     {
         $events = new Events();
         $validatedEvents = $events->getValidatedEvents();
-        return response()->json($validatedEvents, 200);
+        return response()->json($validatedEvents);
     }
 
 }

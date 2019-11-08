@@ -16,18 +16,18 @@ class ApplicationController extends Controller
     public function create()
     {
         $application = new Application();
-        return view('application.create', compact('application'));
+        // return view('application.create', compact('application'));
     }
 
     public function store(Request $request, $event_id)
     {
-        $application = [
+        $request->merge([
             'status'=> Application::$pending,
             'event_id'=> $event_id,
             'user_id'=> auth()->id(),
-        ];
+        ]);
 
-        $response = Application::create($application);
+        $response = Application::create($request->all());
         return $response;
     }
 
@@ -67,4 +67,5 @@ class ApplicationController extends Controller
         $application->update();
         return;
     }
+    
 }

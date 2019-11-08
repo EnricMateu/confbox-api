@@ -21,16 +21,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resources([
-    // '/application'=> 'ApplicationController',
     '/event'=> 'EventController',
 ]);
 
-// EVENTS ROUTES
-Route::get('validateEvent/{event}','EventController@validateEvent');
+//* EVENTS ROUTES
+Route::patch('validateEvent/{event}','EventController@validateEvent');
 Route::get('validatedEvents','EventController@showValidatedEvents');
 
-// APPLICATION ROUTES
-Route::get('event/{event}/apply', 'ApplicationController@store');
+//* APPLICATION ROUTES
+Route::post('event/{event}/apply', 'ApplicationController@store');
 Route::put('/application/{application}/update-status', 'ApplicationController@changeApplicationStatus');
 
 

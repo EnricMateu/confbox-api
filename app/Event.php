@@ -6,14 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    protected $fillable = ['description',
+    static $approved = 1;
+    static $not_approved = 0;
+
+    protected $fillable = [
+        'description',
         'date_from',
         'date_to',
         'city',
         'country',
         'event_url',
         'topic',
-        'title'];
+        'title',
+        'approval_status'
+    ];
 
     public function application()
     {

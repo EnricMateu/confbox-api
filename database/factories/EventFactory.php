@@ -14,7 +14,7 @@ $factory->define(Event::class, function (Faker $faker) {
         'country'=> $faker->country,
         'city'=> $faker->city,
         'event_url'=> $faker->url,
-        'approval_status'=> $faker->boolean,
+        'approval_status'=> 0,
         'title'=> $faker->title,
         'topic'=> $faker->name,
         'description'=> Str::random(10),

@@ -42,7 +42,6 @@ class EventController extends Controller
     {
        //return view('/Events/edit',['event' => $event]);
        return json_encode($event);
-       //return response()->json($event, 200);
     }
 
     public function update(Request $request, Event $event)
@@ -66,14 +65,16 @@ class EventController extends Controller
         $event->approval_status ="approved";
         $event->save();
         //return json_encode($event);
-        return response()->json($event, 200);
+        return redirect('http://localhost:8080/admin');
     }
 
     public function showValidatedEvents ()
     {
         $validatedEvents = DB::table('events')->where('approval_status', '=', 'approved')->get();
-        //return json_encode($validatedEvents);
-        return response()->json($validatedEvents, 200);
+        return json_encode($validatedEvents);
+        //dd($validatedEvents);
+        //return redirect('http://localhost:8080/validatedEvents');
+
     }
 
 }

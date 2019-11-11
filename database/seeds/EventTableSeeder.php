@@ -1,5 +1,8 @@
 <?php
+
 use Illuminate\Database\Seeder;
+use App\Event;
+
 class EventTableSeeder extends Seeder
 {
     /**
@@ -9,6 +12,6 @@ class EventTableSeeder extends Seeder
      */
     public function run()
     {
-       factory(App\Event::class, 5)->create();
+        factory(Event::class, 5)->create();
     }
 }

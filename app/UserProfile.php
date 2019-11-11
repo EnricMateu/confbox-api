@@ -7,13 +7,15 @@ use App\User;
 
 class UserProfile extends Model
 {
+     protected $fillable = ['user_id','profile_name','first_name', 'last_name', 'street_address', 'city', 'country', 'postcode',
+         'phone', 'linkedin_url', 'user_type'];
+
     function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
-    //TODO Ask Team about relationship with User and UserProfile to confirm cohesion of app
     function application()
     {
-        return $this->belongsToMany('App\Application');
+        return $this->belongsToMany(Application::class);
     }
 }

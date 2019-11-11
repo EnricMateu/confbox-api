@@ -72,4 +72,24 @@ class EventController extends Controller
         return response()->json($validatedEvents);
     }
 
+    /** THIERRY HECHO ESO PARA APPRENDER MAS
+     *
+     */
+    public function store_api(Request $request, $company_id)
+    {
+
+        $event = [
+            'date_from' => $request->date_from,
+            'date_to' => $request->date_to,
+            'organizing_company_id' => $company_id,
+            'country' => $request->country,
+            'city' => $request->city,
+            'title' => $request->title,
+            'topic' =>  $request->topic,
+            'description' => $request->description
+        ];
+
+        $response = Event::create($event);
+        return json_encode($response);
+    }
 }

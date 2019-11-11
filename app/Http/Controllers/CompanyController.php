@@ -26,18 +26,18 @@ class CompanyController extends Controller
 */
     public function index()
     {
-        $companies= Company::all();
+        $companies = Company::paginate(50)->all();
         return json_encode($companies);
     }
 
-    public function show(Company $company)
+    public function show(Company $company, $company_id)
     {
-        //
+        $response =  Company::findOrFail($company_id);
+        return $response;
     }
     public function create()
     {
         $company = new Company();
-        return view('application.create', compact('company'));
     }
 
     public function store(Request $request,Company $company)
@@ -46,16 +46,16 @@ class CompanyController extends Controller
         return response()->json($newCompany, 200);
     }
 
-    public function update(Request $request,Company $company)
+    public function update(Request $request, Company $company)
     {
         $company->update($request->all());
-        return response()->json($company, 200);
+        return json_encode($company);
     }
 
-    public function delete(Request $request,Company $company)
+    public function delete(Request $request, Company $company)
     {
         $company->delete();
 
-        return response()->json(null, 204);
+        return response()->json(null);
     }
 }

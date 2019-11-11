@@ -16,7 +16,7 @@ class ApplicationController extends Controller
     public function create()
     {
         $application = new Application();
-        // return view('application.create', compact('application'));
+        return view('application.create', compact('application'));
     }
 
     public function store(Request $request, $event_id)
@@ -56,7 +56,7 @@ class ApplicationController extends Controller
     public function changeApplicationStatus(Request $request, $application_id)
     {
         $application = Application::find($application_id);
-        
+
         if(!$request->approved)
         {
             $application->status = Application::$rejected;
@@ -67,5 +67,4 @@ class ApplicationController extends Controller
         $application->update();
         return;
     }
-    
 }

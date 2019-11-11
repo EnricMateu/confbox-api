@@ -17,8 +17,7 @@ class Event extends Model
         'country',
         'event_url',
         'topic',
-        'title',
-        'approval_status'
+        'title'
     ];
 
     public function application()
@@ -28,6 +27,6 @@ class Event extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 }

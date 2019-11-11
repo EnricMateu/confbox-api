@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(UserProfile::class, function (Faker $faker) {
 return [
 
-//    'user_id'=> $faker->unique()->(50) ,
+    'user_id'=> null ,
     'profile_name'=> $faker ->name ,
     'first_name'=> $faker -> firstName,
     'last_name'=> $faker ->lastName ,
@@ -17,6 +17,7 @@ return [
     'country'=> $faker ->country ,
     'postcode'=> $faker ->randomNumber(5),
     'phone'=> $faker ->phoneNumber ,
-    'linkedin_url'=> $faker ->url
+    'linkedin_url'=> $faker ->url,
+    'user_type' => 'volunteer'
 ];
 });

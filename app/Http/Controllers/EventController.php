@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 use App\Event;
 
-
-
 class EventController extends Controller
 {
     public function index()
@@ -29,6 +27,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        dd($request);
         return Event::create($request->all());
         //return redirect('event/create');
     }
@@ -65,8 +64,8 @@ class EventController extends Controller
     {
         $event->approval_status ="approved";
         $event->save();
-        //return json_encode($event);
-        return response()->json($event, 200);
+        //return response()->json($event, 200);
+        return redirect('http://localhost:8080/admin');
     }
 
     public function showValidatedEvents ()

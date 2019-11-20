@@ -20,9 +20,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'cors']); function (){
-    Route::post('/event', 'EventController@store');
-};
+// Route::group(['middleware' => 'cors']); function (){
+//     Route::post('/event', 'EventController@store');
+// };
+
+Route::group([
+    'middleware' => ['api', 'cors'],
+    'namespace' => $this->namespace,
+    'prefix' => 'api',
+], function ($router) {
+    //Add you routes here, for example:
+    Route::apiResource('/event', 'EventController@store');
+});
 
 Route::resources([
     // '/application'=> 'ApplicationController',
